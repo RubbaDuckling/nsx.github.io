@@ -1,998 +1,1000 @@
 <!doctype html>
 <html lang="da">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#050816">
-  <meta name="description" content="NSX Client — Netstationen desktop client, automation, privat chat og administration samlet ét sted.">
-  <title>NSX Client — Download & Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050816">
+  <meta name="description" content="NSX Client — Netstationen desktop client, automation, privat chat og administration samlet ét sted.">
+  <title>NSX Client — Download & Demo</title>
 
-  <style>
-    :root {
-      --bg: #040713;
-      --bg-2: #071020;
-      --panel: rgba(11, 18, 39, .68);
-      --panel-solid: #0b1226;
-      --panel-2: rgba(14, 27, 57, .78);
-      --line: rgba(132, 160, 255, .18);
-      --line-hot: rgba(76, 229, 255, .34);
-      --text: #f7f9ff;
-      --muted: #91a4c7;
-      --cyan: #44e9ff;
-      --blue: #5a8cff;
-      --violet: #9b6cff;
-      --green: #4df0a7;
-      --amber: #ffd36a;
-      --radius: 22px;
-      --shadow: 0 30px 90px rgba(0,0,0,.42);
-      --mx: 50vw;
-      --my: 20vh;
-    }
+  <style>
+    :root {
+      --bg: #040713;
+      --bg-2: #071020;
+      --panel: rgba(11, 18, 39, .68);
+      --panel-solid: #0b1226;
+      --panel-2: rgba(14, 27, 57, .78);
+      --line: rgba(132, 160, 255, .18);
+      --line-hot: rgba(76, 229, 255, .34);
+      --text: #f7f9ff;
+      --muted: #91a4c7;
+      --cyan: #44e9ff;
+      --blue: #5a8cff;
+      --violet: #9b6cff;
+      --green: #4df0a7;
+      --amber: #ffd36a;
+      --radius: 22px;
+      --shadow: 0 30px 90px rgba(0,0,0,.42);
+      --mx: 50vw;
+      --my: 20vh;
+    }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      color: var(--text);
-      font: 15px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(900px 560px at 83% -8%, rgba(102, 83, 255, .22), transparent 62%),
-        radial-gradient(760px 520px at -8% 24%, rgba(0, 221, 255, .11), transparent 64%),
-        linear-gradient(180deg, #040713 0%, #071020 42%, #040711 100%);
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      font: 15px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(900px 560px at 83% -8%, rgba(102, 83, 255, .22), transparent 62%),
+        radial-gradient(760px 520px at -8% 24%, rgba(0, 221, 255, .11), transparent 64%),
+        linear-gradient(180deg, #040713 0%, #071020 42%, #040711 100%);
+    }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      background:
-        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.72), transparent 84%);
-    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.72), transparent 84%);
+    }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      background: radial-gradient(430px circle at var(--mx) var(--my), rgba(68,233,255,.085), transparent 72%);
-    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background: radial-gradient(430px circle at var(--mx) var(--my), rgba(68,233,255,.085), transparent 72%);
+    }
 
-    ::selection { background: rgba(68,233,255,.25); color: #fff; }
-    a { color: inherit; text-decoration: none; }
-    button, input { font: inherit; }
-    img { max-width: 100%; }
+    ::selection { background: rgba(68,233,255,.25); color: #fff; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    img { max-width: 100%; }
 
-    .wrap { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
-    .muted { color: var(--muted); }
-    .grad {
-      background: linear-gradient(90deg, var(--cyan), #7ba6ff 46%, #b681ff 88%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    .wrap { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+    .muted { color: var(--muted); }
+    .grad {
+      background: linear-gradient(90deg, var(--cyan), #7ba6ff 46%, #b681ff 88%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-    .nav-shell {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      border-bottom: 1px solid rgba(128, 157, 255, .11);
-      background: rgba(4, 7, 19, .68);
-      backdrop-filter: blur(22px) saturate(145%);
-    }
-    .nav {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      min-width: max-content;
-    }
-    .brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 15px rgba(68,233,255,.22));
-    }
-    .brand strong {
-      display: block;
-      font-size: 18px;
-      letter-spacing: .16em;
-      line-height: 1;
-    }
-    .brand small {
-      display: block;
-      color: #8298be;
-      font-size: 10px;
-      letter-spacing: .09em;
-      margin-top: 5px;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-left: auto;
-    }
-    .nav-links a {
-      color: #a8b6cf;
-      font-size: 13px;
-      padding: 9px 11px;
-      border-radius: 10px;
-      transition: .2s ease;
-    }
-    .nav-links a:hover { color: white; background: rgba(255,255,255,.05); }
+    .nav-shell {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(128, 157, 255, .11);
+      background: rgba(4, 7, 19, .68);
+      backdrop-filter: blur(22px) saturate(145%);
+    }
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: max-content;
+    }
+    .brand img {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 15px rgba(68,233,255,.22));
+    }
+    .brand strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: .16em;
+      line-height: 1;
+    }
+    .brand small {
+      display: block;
+      color: #8298be;
+      font-size: 10px;
+      letter-spacing: .09em;
+      margin-top: 5px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+    }
+    .nav-links a {
+      color: #a8b6cf;
+      font-size: 13px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      transition: .2s ease;
+    }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.05); }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      min-height: 46px;
-      padding: 0 17px;
-      border: 1px solid rgba(128,159,255,.22);
-      border-radius: 12px;
-      background: rgba(16, 30, 60, .72);
-      color: #f8fbff;
-      font-weight: 780;
-      cursor: pointer;
-      transition: transform .18s ease, border-color .18s ease, filter .18s ease, background .18s ease;
-      box-shadow: inset 0 1px rgba(255,255,255,.035);
-    }
-    .button:hover { transform: translateY(-2px); border-color: rgba(68,233,255,.38); }
-    .button.primary {
-      border-color: transparent;
-      background: linear-gradient(135deg, #23cde9 0%, #557dff 52%, #8458ec 100%);
-      box-shadow: 0 14px 38px rgba(72, 106, 255, .28), inset 0 1px rgba(255,255,255,.22);
-    }
-    .button.primary:hover { filter: brightness(1.08); }
-    .button.small { min-height: 38px; padding: 0 13px; font-size: 12px; border-radius: 10px; }
-    .button svg { width: 18px; height: 18px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 17px;
+      border: 1px solid rgba(128,159,255,.22);
+      border-radius: 12px;
+      background: rgba(16, 30, 60, .72);
+      color: #f8fbff;
+      font-weight: 780;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, filter .18s ease, background .18s ease;
+      box-shadow: inset 0 1px rgba(255,255,255,.035);
+    }
+    .button:hover { transform: translateY(-2px); border-color: rgba(68,233,255,.38); }
+    .button.primary {
+      border-color: transparent;
+      background: linear-gradient(135deg, #23cde9 0%, #557dff 52%, #8458ec 100%);
+      box-shadow: 0 14px 38px rgba(72, 106, 255, .28), inset 0 1px rgba(255,255,255,.22);
+    }
+    .button.primary:hover { filter: brightness(1.08); }
+    .button.small { min-height: 38px; padding: 0 13px; font-size: 12px; border-radius: 10px; }
+    .button svg { width: 18px; height: 18px; }
 
-    .hero {
-      position: relative;
-      padding: 94px 0 76px;
-      min-height: 720px;
-      display: flex;
-      align-items: center;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 620px;
-      height: 620px;
-      right: -270px;
-      top: 20px;
-      border-radius: 50%;
-      border: 1px solid rgba(93,119,255,.11);
-      box-shadow:
-        0 0 0 70px rgba(93,119,255,.022),
-        0 0 0 150px rgba(93,119,255,.016),
-        0 0 130px rgba(87,98,255,.11);
-      pointer-events: none;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.04fr .96fr;
-      align-items: center;
-      gap: 54px;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--cyan);
-      font-weight: 850;
-      font-size: 11px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-    .eyebrow::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: currentColor;
-      box-shadow: 0 0 16px currentColor;
-    }
-    .hero h1 {
-      max-width: 780px;
-      margin: 18px 0 22px;
-      font-size: clamp(48px, 7vw, 84px);
-      line-height: .98;
-      letter-spacing: -.055em;
-    }
-    .hero-copy {
-      max-width: 720px;
-      margin: 0 0 30px;
-      color: #a7b6d2;
-      font-size: clamp(17px, 2vw, 20px);
-    }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .micro-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 13px;
-      margin-top: 20px;
-      color: #7e93b8;
-      font-size: 12px;
-    }
-    .micro-row span { display: inline-flex; align-items: center; gap: 7px; }
-    .micro-row i {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: rgba(126,147,184,.6);
-    }
+    .hero {
+      position: relative;
+      padding: 94px 0 76px;
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      right: -270px;
+      top: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(93,119,255,.11);
+      box-shadow:
+        0 0 0 70px rgba(93,119,255,.022),
+        0 0 0 150px rgba(93,119,255,.016),
+        0 0 130px rgba(87,98,255,.11);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      align-items: center;
+      gap: 54px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan);
+      font-weight: 850;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 16px currentColor;
+    }
+    .hero h1 {
+      max-width: 780px;
+      margin: 18px 0 22px;
+      font-size: clamp(48px, 7vw, 84px);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+    .hero-copy {
+      max-width: 720px;
+      margin: 0 0 30px;
+      color: #a7b6d2;
+      font-size: clamp(17px, 2vw, 20px);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .micro-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 13px;
+      margin-top: 20px;
+      color: #7e93b8;
+      font-size: 12px;
+    }
+    .micro-row span { display: inline-flex; align-items: center; gap: 7px; }
+    .micro-row i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(126,147,184,.6);
+    }
 
-    .client-shell {
-      position: relative;
-      min-height: 510px;
-      border: 1px solid rgba(115,151,255,.23);
-      border-radius: 28px;
-      padding: 14px;
-      background: linear-gradient(145deg, rgba(17,31,66,.78), rgba(6,11,26,.96));
-      box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.018) inset;
-      overflow: hidden;
-      transform: perspective(1100px) rotateY(-2.4deg) rotateX(1deg);
-    }
-    .client-shell::after {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      pointer-events: none;
-      background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.05) 42%, transparent 58%);
-      transform: translateX(-120%);
-      animation: shine 8s ease-in-out infinite;
-    }
-    @keyframes shine { 0%, 64% { transform: translateX(-120%); } 78%, 100% { transform: translateX(120%); } }
+    .client-shell {
+      position: relative;
+      min-height: 510px;
+      border: 1px solid rgba(115,151,255,.23);
+      border-radius: 28px;
+      padding: 14px;
+      background: linear-gradient(145deg, rgba(17,31,66,.78), rgba(6,11,26,.96));
+      box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.018) inset;
+      overflow: hidden;
+      transform: perspective(1100px) rotateY(-2.4deg) rotateX(1deg);
+    }
+    .client-shell::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.05) 42%, transparent 58%);
+      transform: translateX(-120%);
+      animation: shine 8s ease-in-out infinite;
+    }
+    @keyframes shine { 0%, 64% { transform: translateX(-120%); } 78%, 100% { transform: translateX(120%); } }
 
-    .window-bar {
-      height: 40px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 0 10px;
-      color: #7087ad;
-      font-size: 11px;
-    }
-    .window-dot { width: 8px; height: 8px; border-radius: 50%; background: #263654; }
-    .window-title { margin-left: 6px; letter-spacing: .08em; }
-    .client-body {
-      position: relative;
-      min-height: 440px;
-      overflow: hidden;
-      border-radius: 18px;
-      border: 1px solid rgba(112,146,255,.14);
-      background:
-        radial-gradient(340px 230px at 72% 16%, rgba(99,76,255,.14), transparent 66%),
-        linear-gradient(180deg, #081126, #07101f);
-    }
-    .client-body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px);
-      background-size: 100% 4px;
-      opacity: .45;
-    }
-    .client-top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 18px 20px;
-      border-bottom: 1px solid rgba(112,146,255,.12);
-    }
-    .client-logo {
-      width: 58px;
-      height: 58px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(68,233,255,.16));
-    }
-    .client-title strong { font-size: 17px; letter-spacing: .09em; }
-    .client-title small { display: block; color: #7287ac; font-size: 11px; }
-    .online {
-      margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 10px;
-      color: #87f4c1;
-      background: rgba(77,240,167,.07);
-      border: 1px solid rgba(77,240,167,.17);
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .online::before {
-      content: "";
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--green); box-shadow: 0 0 12px var(--green);
-    }
-    .client-grid {
-      display: grid;
-      grid-template-columns: .86fr 1.14fr;
-      gap: 12px;
-      padding: 16px;
-    }
-    .client-panel {
-      border: 1px solid rgba(119,153,255,.13);
-      border-radius: 14px;
-      background: rgba(6,14,31,.72);
-      padding: 15px;
-    }
-    .panel-label {
-      color: #6d83a8;
-      font-size: 9px;
-      font-weight: 850;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-    .metric {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(119,153,255,.08);
-      color: #aebbd1;
-      font-size: 11px;
-    }
-    .metric:last-child { border-bottom: 0; }
-    .metric b { color: #dfe7f7; }
-    .metric em { font-style: normal; color: #62edb0; }
-    .activity {
-      height: 72px;
-      display: flex;
-      align-items: flex-end;
-      gap: 5px;
-      margin-top: 14px;
-    }
-    .activity span {
-      flex: 1;
-      min-height: 7px;
-      border-radius: 5px 5px 2px 2px;
-      background: linear-gradient(to top, rgba(75,112,255,.28), rgba(68,233,255,.9));
-      box-shadow: 0 0 12px rgba(68,233,255,.09);
-      animation: bars 2.5s ease-in-out infinite alternate;
-    }
-    .activity span:nth-child(2n) { animation-delay: -.7s; }
-    .activity span:nth-child(3n) { animation-delay: -1.3s; }
-    @keyframes bars { from { transform: scaleY(.58); } to { transform: scaleY(1); } }
+    .window-bar {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 10px;
+      color: #7087ad;
+      font-size: 11px;
+    }
+    .window-dot { width: 8px; height: 8px; border-radius: 50%; background: #263654; }
+    .window-title { margin-left: 6px; letter-spacing: .08em; }
+    .client-body {
+      position: relative;
+      min-height: 440px;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(112,146,255,.14);
+      background:
+        radial-gradient(340px 230px at 72% 16%, rgba(99,76,255,.14), transparent 66%),
+        linear-gradient(180deg, #081126, #07101f);
+    }
+    .client-body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 100% 4px;
+      opacity: .45;
+    }
+    .client-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(112,146,255,.12);
+    }
+    .client-logo {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(68,233,255,.16));
+    }
+    .client-title strong { font-size: 17px; letter-spacing: .09em; }
+    .client-title small { display: block; color: #7287ac; font-size: 11px; }
+    .online {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      color: #87f4c1;
+      background: rgba(77,240,167,.07);
+      border: 1px solid rgba(77,240,167,.17);
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .online::before {
+      content: "";
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 12px var(--green);
+    }
+    .client-grid {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 12px;
+      padding: 16px;
+    }
+    .client-panel {
+      border: 1px solid rgba(119,153,255,.13);
+      border-radius: 14px;
+      background: rgba(6,14,31,.72);
+      padding: 15px;
+    }
+    .panel-label {
+      color: #6d83a8;
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(119,153,255,.08);
+      color: #aebbd1;
+      font-size: 11px;
+    }
+    .metric:last-child { border-bottom: 0; }
+    .metric b { color: #dfe7f7; }
+    .metric em { font-style: normal; color: #62edb0; }
+    .activity {
+      height: 72px;
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      margin-top: 14px;
+    }
+    .activity span {
+      flex: 1;
+      min-height: 7px;
+      border-radius: 5px 5px 2px 2px;
+      background: linear-gradient(to top, rgba(75,112,255,.28), rgba(68,233,255,.9));
+      box-shadow: 0 0 12px rgba(68,233,255,.09);
+      animation: bars 2.5s ease-in-out infinite alternate;
+    }
+    .activity span:nth-child(2n) { animation-delay: -.7s; }
+    .activity span:nth-child(3n) { animation-delay: -1.3s; }
+    @keyframes bars { from { transform: scaleY(.58); } to { transform: scaleY(1); } }
 
-    .section { padding: 84px 0; }
-    .section-head { max-width: 760px; margin-bottom: 30px; }
-    .section-head h2 {
-      margin: 10px 0 10px;
-      font-size: clamp(34px, 5vw, 52px);
-      line-height: 1.06;
-      letter-spacing: -.04em;
-    }
-    .section-head p { margin: 0; color: var(--muted); font-size: 16px; }
+    .section { padding: 84px 0; }
+    .section-head { max-width: 760px; margin-bottom: 30px; }
+    .section-head h2 {
+      margin: 10px 0 10px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.06;
+      letter-spacing: -.04em;
+    }
+    .section-head p { margin: 0; color: var(--muted); font-size: 16px; }
 
-    .demo-card {
-      position: relative;
-      padding: 1px;
-      border-radius: 28px;
-      background: linear-gradient(135deg, rgba(68,233,255,.44), rgba(97,114,255,.12) 38%, rgba(155,108,255,.36));
-      box-shadow: var(--shadow);
-    }
-    .demo-inner {
-      overflow: hidden;
-      min-height: 560px;
-      border-radius: 27px;
-      background: #070d1c;
-      position: relative;
-    }
-    .demo-toolbar {
-      position: relative;
-      z-index: 3;
-      height: 58px;
-      padding: 0 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid rgba(125,153,255,.13);
-      background: rgba(9,17,36,.94);
-    }
-    .demo-toolbar .label { margin-left: 8px; color: #8ba0c4; font-size: 11px; letter-spacing: .1em; }
-    .demo-stage {
-      position: relative;
-      min-height: 500px;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(650px 360px at 50% 5%, rgba(80,96,255,.12), transparent 70%),
-        #050a16;
-    }
-    #demoGif {
-      width: 100%;
-      max-height: 640px;
-      object-fit: contain;
-      display: block;
-      opacity: 0;
-      transition: opacity .3s ease;
-    }
-    #demoGif.loaded { opacity: 1; }
-    .demo-fallback {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 28px;
-      text-align: center;
-    }
-    .demo-fallback.hidden { display: none; }
-    .demo-fallback-box {
-      width: min(560px, 100%);
-      padding: 36px 26px;
-      border: 1px dashed rgba(106,164,255,.34);
-      border-radius: 20px;
-      background: rgba(10,19,41,.66);
-    }
-    .demo-fallback-box svg { width: 44px; height: 44px; color: var(--cyan); }
-    .demo-fallback-box h3 { margin: 12px 0 6px; font-size: 22px; }
-    .demo-fallback-box p { margin: 0; color: #8fa4c8; }
-    .code {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 7px 10px;
-      border: 1px solid rgba(109,151,255,.14);
-      border-radius: 8px;
-      background: #071020;
-      color: #b9caf0;
-      font: 12px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
-    }
-    .preview-tools {
-      display: none;
-      margin-top: 16px;
-      padding: 18px;
-      border: 1px solid rgba(255,211,106,.22);
-      border-radius: 14px;
-      background: rgba(255,211,106,.055);
-    }
-    .preview-tools.visible { display: block; }
-    .preview-tools label { display: inline-flex; }
-    .preview-tools input { display: none; }
-    .preview-tools p { margin: 8px 0 0; color: #ab9e7b; font-size: 12px; }
+    .demo-card {
+      position: relative;
+      padding: 1px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(68,233,255,.44), rgba(97,114,255,.12) 38%, rgba(155,108,255,.36));
+      box-shadow: var(--shadow);
+    }
+    .demo-inner {
+      overflow: hidden;
+      min-height: 560px;
+      border-radius: 27px;
+      background: #070d1c;
+      position: relative;
+    }
+    .demo-toolbar {
+      position: relative;
+      z-index: 3;
+      height: 58px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(125,153,255,.13);
+      background: rgba(9,17,36,.94);
+    }
+    .demo-toolbar .label { margin-left: 8px; color: #8ba0c4; font-size: 11px; letter-spacing: .1em; }
+    .demo-stage {
+      position: relative;
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(650px 360px at 50% 5%, rgba(80,96,255,.12), transparent 70%),
+        #050a16;
+    }
+    #demoGif {
+      width: 100%;
+      max-height: 640px;
+      object-fit: contain;
+      display: block;
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    #demoGif.loaded { opacity: 1; }
+    .demo-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+    }
+    .demo-fallback.hidden { display: none; }
+    .demo-fallback-box {
+      width: min(560px, 100%);
+      padding: 36px 26px;
+      border: 1px dashed rgba(106,164,255,.34);
+      border-radius: 20px;
+      background: rgba(10,19,41,.66);
+    }
+    .demo-fallback-box svg { width: 44px; height: 44px; color: var(--cyan); }
+    .demo-fallback-box h3 { margin: 12px 0 6px; font-size: 22px; }
+    .demo-fallback-box p { margin: 0; color: #8fa4c8; }
+    .code {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 7px 10px;
+      border: 1px solid rgba(109,151,255,.14);
+      border-radius: 8px;
+      background: #071020;
+      color: #b9caf0;
+      font: 12px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+    .preview-tools {
+      display: none;
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255,211,106,.22);
+      border-radius: 14px;
+      background: rgba(255,211,106,.055);
+    }
+    .preview-tools.visible { display: block; }
+    .preview-tools label { display: inline-flex; }
+    .preview-tools input { display: none; }
+    .preview-tools p { margin: 8px 0 0; color: #ab9e7b; font-size: 12px; }
 
-    .bento {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-    }
-    .card {
-      position: relative;
-      overflow: hidden;
-      min-height: 238px;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background:
-        radial-gradient(360px 180px at 100% 0%, rgba(90,111,255,.08), transparent 70%),
-        linear-gradient(145deg, rgba(12,25,52,.86), rgba(6,13,29,.93));
-      box-shadow: 0 18px 45px rgba(0,0,0,.18);
-      transition: transform .22s ease, border-color .22s ease;
-    }
-    .card:hover { transform: translateY(-4px); border-color: rgba(68,233,255,.27); }
-    .card.w7 { grid-column: span 7; }
-    .card.w5 { grid-column: span 5; }
-    .card.w4 { grid-column: span 4; }
-    .card.w8 { grid-column: span 8; }
-    .card h3 { margin: 15px 0 8px; font-size: 20px; }
-    .card p { margin: 0; color: #93a7c8; }
-    .card ul { margin: 14px 0 0; padding-left: 18px; color: #a6b6d2; }
-    .card li { margin: 4px 0; }
-    .icon {
-      width: 46px; height: 46px;
-      display: grid; place-items: center;
-      border-radius: 13px;
-      border: 1px solid rgba(97,161,255,.22);
-      background: linear-gradient(145deg, rgba(68,233,255,.1), rgba(155,108,255,.13));
-      color: #d9f7ff;
-    }
-    .icon svg { width: 22px; height: 22px; }
-    .card-kicker {
-      position: absolute;
-      right: 18px;
-      top: 17px;
-      color: #5f7398;
-      font: 700 9px/1 ui-monospace, SFMono-Regular, Consolas, monospace;
-      letter-spacing: .14em;
-    }
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 238px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(360px 180px at 100% 0%, rgba(90,111,255,.08), transparent 70%),
+        linear-gradient(145deg, rgba(12,25,52,.86), rgba(6,13,29,.93));
+      box-shadow: 0 18px 45px rgba(0,0,0,.18);
+      transition: transform .22s ease, border-color .22s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(68,233,255,.27); }
+    .card.w7 { grid-column: span 7; }
+    .card.w5 { grid-column: span 5; }
+    .card.w4 { grid-column: span 4; }
+    .card.w8 { grid-column: span 8; }
+    .card h3 { margin: 15px 0 8px; font-size: 20px; }
+    .card p { margin: 0; color: #93a7c8; }
+    .card ul { margin: 14px 0 0; padding-left: 18px; color: #a6b6d2; }
+    .card li { margin: 4px 0; }
+    .icon {
+      width: 46px; height: 46px;
+      display: grid; place-items: center;
+      border-radius: 13px;
+      border: 1px solid rgba(97,161,255,.22);
+      background: linear-gradient(145deg, rgba(68,233,255,.1), rgba(155,108,255,.13));
+      color: #d9f7ff;
+    }
+    .icon svg { width: 22px; height: 22px; }
+    .card-kicker {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      color: #5f7398;
+      font: 700 9px/1 ui-monospace, SFMono-Regular, Consolas, monospace;
+      letter-spacing: .14em;
+    }
 
-    .ticker-shell {
-      overflow: hidden;
-      padding: 15px 0;
-      border-block: 1px solid rgba(115,151,255,.1);
-      background: rgba(5,11,24,.58);
-    }
-    .ticker {
-      display: flex;
-      width: max-content;
-      gap: 10px;
-      animation: ticker 36s linear infinite;
-    }
-    .ticker:hover { animation-play-state: paused; }
-    .pill {
-      padding: 8px 12px;
-      white-space: nowrap;
-      border: 1px solid rgba(113,152,255,.15);
-      border-radius: 999px;
-      background: rgba(14,27,55,.76);
-      color: #a9bbd8;
-      font-size: 11px;
-    }
-    @keyframes ticker { to { transform: translateX(-50%); } }
+    .ticker-shell {
+      overflow: hidden;
+      padding: 15px 0;
+      border-block: 1px solid rgba(115,151,255,.1);
+      background: rgba(5,11,24,.58);
+    }
+    .ticker {
+      display: flex;
+      width: max-content;
+      gap: 10px;
+      animation: ticker 36s linear infinite;
+    }
+    .ticker:hover { animation-play-state: paused; }
+    .pill {
+      padding: 8px 12px;
+      white-space: nowrap;
+      border: 1px solid rgba(113,152,255,.15);
+      border-radius: 999px;
+      background: rgba(14,27,55,.76);
+      color: #a9bbd8;
+      font-size: 11px;
+    }
+    @keyframes ticker { to { transform: translateX(-50%); } }
 
-    .security-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-    .security-item {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(8,17,37,.68);
-    }
-    .security-item b { display: block; margin-bottom: 7px; }
-    .security-item span { color: #8ea3c5; font-size: 13px; }
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .security-item {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(8,17,37,.68);
+    }
+    .security-item b { display: block; margin-bottom: 7px; }
+    .security-item span { color: #8ea3c5; font-size: 13px; }
 
-    .cta {
-      position: relative;
-      overflow: hidden;
-      padding: 48px;
-      border: 1px solid rgba(87,155,255,.25);
-      border-radius: 30px;
-      background:
-        radial-gradient(530px 260px at 82% 10%, rgba(124,76,255,.28), transparent 67%),
-        radial-gradient(420px 220px at 4% 100%, rgba(28,211,245,.12), transparent 72%),
-        linear-gradient(135deg, rgba(12,31,66,.96), rgba(7,14,31,.97));
-      box-shadow: var(--shadow);
-    }
-    .cta-grid {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 30px;
-      align-items: center;
-    }
-    .cta h2 { margin: 10px 0 10px; font-size: clamp(32px, 5vw, 50px); line-height: 1.04; letter-spacing: -.04em; }
-    .cta p { margin: 0; max-width: 700px; color: #9fb0cc; }
-    .download-stack { display: grid; gap: 9px; min-width: 220px; }
-    .download-stack small { text-align: center; color: #7f93b7; font-size: 10px; }
+    .cta {
+      position: relative;
+      overflow: hidden;
+      padding: 48px;
+      border: 1px solid rgba(87,155,255,.25);
+      border-radius: 30px;
+      background:
+        radial-gradient(530px 260px at 82% 10%, rgba(124,76,255,.28), transparent 67%),
+        radial-gradient(420px 220px at 4% 100%, rgba(28,211,245,.12), transparent 72%),
+        linear-gradient(135deg, rgba(12,31,66,.96), rgba(7,14,31,.97));
+      box-shadow: var(--shadow);
+    }
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+    }
+    .cta h2 { margin: 10px 0 10px; font-size: clamp(32px, 5vw, 50px); line-height: 1.04; letter-spacing: -.04em; }
+    .cta p { margin: 0; max-width: 700px; color: #9fb0cc; }
+    .download-stack { display: grid; gap: 9px; min-width: 220px; }
+    .download-stack small { text-align: center; color: #7f93b7; font-size: 10px; }
 
-    footer {
-      margin-top: 86px;
-      padding: 42px 0 60px;
-      border-top: 1px solid rgba(118,151,255,.1);
-      color: #7388ab;
-      font-size: 11px;
-    }
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: flex-end;
-    }
-    .footer-brand { color: #b7c7e1; font-weight: 800; letter-spacing: .1em; }
+    footer {
+      margin-top: 86px;
+      padding: 42px 0 60px;
+      border-top: 1px solid rgba(118,151,255,.1);
+      color: #7388ab;
+      font-size: 11px;
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-end;
+    }
+    .footer-brand { color: #b7c7e1; font-weight: 800; letter-spacing: .1em; }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
-    .reveal.in { opacity: 1; transform: none; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.in { opacity: 1; transform: none; }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
-      .client-shell { transform: none; }
-    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      .client-shell { transform: none; }
+    }
 
-    @media (max-width: 980px) {
-      .nav-links { display: none; }
-      .hero { min-height: 0; padding-top: 70px; }
-      .hero-grid { grid-template-columns: 1fr; }
-      .client-shell { transform: none; }
-      .bento { grid-template-columns: 1fr 1fr; }
-      .card.w7, .card.w5, .card.w4, .card.w8 { grid-column: span 1; }
-      .security-grid { grid-template-columns: 1fr 1fr; }
-      .cta-grid { grid-template-columns: 1fr; }
-      .download-stack { width: max-content; }
-    }
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .hero { min-height: 0; padding-top: 70px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .client-shell { transform: none; }
+      .bento { grid-template-columns: 1fr 1fr; }
+      .card.w7, .card.w5, .card.w4, .card.w8 { grid-column: span 1; }
+      .security-grid { grid-template-columns: 1fr 1fr; }
+      .cta-grid { grid-template-columns: 1fr; }
+      .download-stack { width: max-content; }
+    }
 
-    @media (max-width: 640px) {
-      .wrap { width: min(100% - 22px, 1180px); }
-      .nav { height: 62px; }
-      .brand img { width: 36px; height: 36px; }
-      .nav > .button { margin-left: auto; }
-      .hero { padding: 58px 0 50px; }
-      .hero h1 { font-size: clamp(44px, 15vw, 66px); }
-      .client-shell { padding: 8px; border-radius: 20px; }
-      .client-grid { grid-template-columns: 1fr; }
-      .client-grid .client-panel:first-child { display: none; }
-      .demo-inner { min-height: 360px; }
-      .demo-stage { min-height: 310px; }
-      .section { padding: 60px 0; }
-      .bento { grid-template-columns: 1fr; }
-      .security-grid { grid-template-columns: 1fr; }
-      .cta { padding: 30px 22px; border-radius: 22px; }
-      .download-stack { width: 100%; }
-      .footer-grid { display: block; }
-      .footer-grid > div:last-child { margin-top: 14px; }
-    }
-  </style>
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 22px, 1180px); }
+      .nav { height: 62px; }
+      .brand img { width: 36px; height: 36px; }
+      .nav > .button { margin-left: auto; }
+      .hero { padding: 58px 0 50px; }
+      .hero h1 { font-size: clamp(44px, 15vw, 66px); }
+      .client-shell { padding: 8px; border-radius: 20px; }
+      .client-grid { grid-template-columns: 1fr; }
+      .client-grid .client-panel:first-child { display: none; }
+      .demo-inner { min-height: 360px; }
+      .demo-stage { min-height: 310px; }
+      .section { padding: 60px 0; }
+      .bento { grid-template-columns: 1fr; }
+      .security-grid { grid-template-columns: 1fr; }
+      .cta { padding: 30px 22px; border-radius: 22px; }
+      .download-stack { width: 100%; }
+      .footer-grid { display: block; }
+      .footer-grid > div:last-child { margin-top: 14px; }
+    }
+  </style>
 </head>
 
 <body>
-  <header class="nav-shell">
-    <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="NSX forsiden">
-        <img src="assets/nsx-logo.png" alt="NSX">
-        <span><strong>NSX</strong><small>CLIENT <span data-version></span></small></span>
-      </a>
+  <header class="nav-shell">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="NSX forsiden">
+        <img src="assets/nsx-logo.png" alt="NSX">
+        <span><strong>NSX</strong><small>CLIENT <span data-version></span></small></span>
+      </a>
 
-      <nav class="nav-links" aria-label="Hovednavigation">
-        <a href="#demo">Demo</a>
-        <a href="#features">Features</a>
-        <a href="#security">Adgang</a>
-        <a href="#download">Download</a>
-      </nav>
+      <nav class="nav-links" aria-label="Hovednavigation">
+        <a href="#demo">Demo</a>
+        <a href="#features">Features</a>
+        <a href="#security">Adgang</a>
+        <a href="#download">Download</a>
+      </nav>
 
-      <a class="button small primary download-link" href="#" rel="noopener">
-        Download
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
-          <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/>
-        </svg>
-      </a>
-    </div>
-  </header>
+      <a class="button small primary download-link" href="#" rel="noopener">
+        Download
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+          <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/>
+        </svg>
+      </a>
+    </div>
+  </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="reveal">
-          <div class="eyebrow">Netstationen · Desktop Client · Windows</div>
-          <h1>Din chat.<br><span class="grad">Dit kontrolcenter.</span></h1>
-          <p class="hero-copy">
-            NSX samler Netstationen, automation, privat chat, Telegram, overvågning og administration i én moderne Windows-klient — uden at du skal hoppe mellem scripts, faner og hjælpeværktøjer.
-          </p>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Netstationen · Desktop Client · Windows</div>
+          <h1>Din chat.<br><span class="grad">Dit kontrolcenter.</span></h1>
+          <p class="hero-copy">
+            NSX samler Netstationen, automation, privat chat, Telegram, overvågning og administration i én moderne Windows-klient — uden at du skal hoppe mellem scripts, faner og hjælpeværktøjer.
+          </p>
 
-          <div class="hero-actions">
-            <a class="button primary download-link" href="#" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
-                <path d="M4 5.5 10.7 4v7.2H4V5.5Zm7.8-1.8L20 2v9.2h-8.2V3.7ZM4 12.3h6.7V20L4 18.7v-6.4Zm7.8 0H20V22l-8.2-1.7v-8Z"/>
-              </svg>
-              Download NSX Setup
-            </a>
-            <a class="button" href="#demo">
-              Se NSX i aktion
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
-                <path d="m9 18 6-6-6-6"/>
-              </svg>
-            </a>
-          </div>
+          <div class="hero-actions">
+            <a class="button primary download-link" href="#" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                <path d="M4 5.5 10.7 4v7.2H4V5.5Zm7.8-1.8L20 2v9.2h-8.2V3.7ZM4 12.3h6.7V20L4 18.7v-6.4Zm7.8 0H20V22l-8.2-1.7v-8Z"/>
+              </svg>
+              Download NSX Setup
+            </a>
+            <a class="button" href="#demo">
+              Se NSX i aktion
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
 
-          <div class="micro-row">
-            <span>Windows 11</span><i></i>
-            <span>v<span data-version></span></span><i></i>
-            <span>Privat licens</span><i></i>
-            <span>Tauri + WebView2</span>
-          </div>
-        </div>
+          <div class="micro-row">
+            <span>Windows 11</span><i></i>
+            <span>v<span data-version></span></span><i></i>
+            <span>Privat licens</span><i></i>
+            <span>Tauri + WebView2</span>
+          </div>
+        </div>
 
-        <div class="client-shell reveal" aria-label="Illustration af NSX klient">
-          <div class="window-bar">
-            <span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
-            <span class="window-title">NSX CONTROL CENTER</span>
-          </div>
-          <div class="client-body">
-            <div class="client-top">
-              <img class="client-logo" src="assets/nsx-logo.png" alt="">
-              <div class="client-title">
-                <strong>NSX CLIENT</strong>
-                <small>Netstationen Control Center</small>
-              </div>
-              <span class="online">Online</span>
-            </div>
+        <div class="client-shell reveal" aria-label="Illustration af NSX klient">
+          <div class="window-bar">
+            <span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
+            <span class="window-title">NSX CONTROL CENTER</span>
+          </div>
+          <div class="client-body">
+            <div class="client-top">
+              <img class="client-logo" src="assets/nsx-logo.png" alt="">
+              <div class="client-title">
+                <strong>NSX CLIENT</strong>
+                <small>Netstationen Control Center</small>
+              </div>
+              <span class="online">Online</span>
+            </div>
 
-            <div class="client-grid">
-              <div class="client-panel">
-                <div class="panel-label">Runtime</div>
-                <div class="metric"><span>Server</span><em>Connected</em></div>
-                <div class="metric"><span>License</span><em>Valid</em></div>
-                <div class="metric"><span>WebSocket</span><em>Live</em></div>
-                <div class="metric"><span>Room</span><b>Active</b></div>
-              </div>
+            <div class="client-grid">
+              <div class="client-panel">
+                <div class="panel-label">Runtime</div>
+                <div class="metric"><span>Server</span><em>Connected</em></div>
+                <div class="metric"><span>License</span><em>Valid</em></div>
+                <div class="metric"><span>WebSocket</span><em>Live</em></div>
+                <div class="metric"><span>Room</span><b>Active</b></div>
+              </div>
 
-              <div class="client-panel">
-                <div class="panel-label">Live activity</div>
-                <div class="activity" aria-hidden="true">
-                  <span style="height:32%"></span><span style="height:64%"></span><span style="height:42%"></span>
-                  <span style="height:88%"></span><span style="height:54%"></span><span style="height:76%"></span>
-                  <span style="height:46%"></span><span style="height:92%"></span><span style="height:68%"></span>
-                  <span style="height:38%"></span><span style="height:79%"></span><span style="height:57%"></span>
-                </div>
-                <div class="metric"><span>Auto Login</span><em>Enabled</em></div>
-                <div class="metric"><span>NSX Chat</span><em>Ready</em></div>
-                <div class="metric"><span>Telegram Bridge</span><b>Standby</b></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+              <div class="client-panel">
+                <div class="panel-label">Live activity</div>
+                <div class="activity" aria-hidden="true">
+                  <span style="height:32%"></span><span style="height:64%"></span><span style="height:42%"></span>
+                  <span style="height:88%"></span><span style="height:54%"></span><span style="height:76%"></span>
+                  <span style="height:46%"></span><span style="height:92%"></span><span style="height:68%"></span>
+                  <span style="height:38%"></span><span style="height:79%"></span><span style="height:57%"></span>
+                </div>
+                <div class="metric"><span>Auto Login</span><em>Enabled</em></div>
+                <div class="metric"><span>NSX Chat</span><em>Ready</em></div>
+                <div class="metric"><span>Telegram Bridge</span><b>Standby</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="ticker-shell" aria-label="NSX funktioner">
-      <div class="ticker" id="ticker"></div>
-    </div>
+    <div class="ticker-shell" aria-label="NSX funktioner">
+      <div class="ticker" id="ticker"></div>
+    </div>
 
-    <section id="demo" class="section">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Preview</div>
-          <h2>Se NSX <span class="grad">af NSX - Klient</span></h2>
-        </div>
+    <section id="demo" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Preview</div>
+          <h2>Se NSX <span class="grad">af NSX - Klient</span></h2>
+        </div>
 
-        <div class="demo-card reveal">
-          <div class="demo-inner">
-            <div class="demo-toolbar">
-              <span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
-              <span class="label">NSX_DEMO.GIF</span>
-            </div>
-            <div class="demo-stage">
-              <img id="demoGif" alt="Animeret demonstration af NSX Client">
-              <div class="demo-fallback" id="demoFallback">
-                <div class="demo-fallback-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="m8 14 2.5-3 2.5 3 2-2 3 4H6l2-2Z"/>
-                  </svg>
-                  <span class="code">assets/nsx.gif</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="demo-card reveal">
+          <div class="demo-inner">
+            <div class="demo-toolbar">
+              <span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
+              <span class="label">NSX_DEMO.GIF</span>
+            </div>
+            <div class="demo-stage">
+              <img id="demoGif" alt="Animeret demonstration af NSX Client">
+              <div class="demo-fallback" id="demoFallback">
+                <div class="demo-fallback-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="m8 14 2.5-3 2.5 3 2-2 3 4H6l2-2Z"/>
+                  </svg>
+                  <span class="code"><img src="https://rubbaduckling.github.io/nsx.github.io/assets/nsx.gif" alt="" srcset="https://rubbaduckling.github.io/nsx.github.io/assets/nsx.gif"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div class="preview-tools" id="previewTools">
-          <strong>Lokal GIF-preview</strong>
-          <p>Vælg en GIF fra din PC. Den vises kun lokalt i denne browser og bliver ikke uploadet til GitHub.</p>
-          <label class="button small" style="margin-top:12px">
-            Vælg GIF
-            <input type="file" id="gifPicker" accept="image/gif">
-          </label>
-        </div>
-      </div>
-    </section>
+        <div class="preview-tools" id="previewTools">
+          <strong>Lokal GIF-preview</strong>
+          <p>Vælg en GIF fra din PC. Den vises kun lokalt i denne browser og bliver ikke uploadet til GitHub.</p>
+          <label class="button small" style="margin-top:12px">
+            Vælg GIF
+            <input type="file" id="gifPicker" accept="image/gif">
+          </label>
+        </div>
+      </div>
+    </section>
 
-    <section id="features" class="section">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Core experience</div>
-          <h2>Ikke bare en wrapper.<br><span class="grad">Et helt lag ovenpå.</span></h2>
-          <p>NSX kombinerer det originale chatmiljø med værktøjer, realtime-status og automation i samme klient.</p>
-        </div>
+    <section id="features" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Core experience</div>
+          <h2>Ikke bare en wrapper.<br><span class="grad">Et helt lag ovenpå.</span></h2>
+          <p>NSX kombinerer det originale chatmiljø med værktøjer, realtime-status og automation i samme klient.</p>
+        </div>
 
-        <div class="bento">
-          <article class="card w7 reveal">
-            <span class="card-kicker">01 / CORE</span>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg>
-            </div>
-            <h3>Integreret Netstationen</h3>
-            <p>Netstationen åbnes direkte i NSX via WebView2, så chatten føles som en del af selve desktop-klienten.</p>
-            <ul>
-              <li>Ingen separat browser nødvendig</li>
-              <li>NSX-funktioner tæt på chatmiljøet</li>
-              <li>Direkte genindlæsning og chat-start</li>
-            </ul>
-          </article>
+        <div class="bento">
+          <article class="card w7 reveal">
+            <span class="card-kicker">01 / CORE</span>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg>
+            </div>
+            <h3>Integreret Netstationen</h3>
+            <p>Netstationen åbnes direkte i NSX via WebView2, så chatten føles som en del af selve desktop-klienten.</p>
+            <ul>
+              <li>Ingen separat browser nødvendig</li>
+              <li>NSX-funktioner tæt på chatmiljøet</li>
+              <li>Direkte genindlæsning og chat-start</li>
+            </ul>
+          </article>
 
-          <article class="card w5 reveal">
-            <span class="card-kicker">02 / LIVE</span>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg>
-            </div>
-            <h3>Dashboard & live-status</h3>
-            <p>Ét samlet overblik over klient, server, licens, runtime, session og automation.</p>
-          </article>
+          <article class="card w5 reveal">
+            <span class="card-kicker">02 / LIVE</span>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg>
+            </div>
+            <h3>Dashboard & live-status</h3>
+            <p>Ét samlet overblik over klient, server, licens, runtime, session og automation.</p>
+          </article>
 
-          <article class="card w4 reveal">
-            <span class="card-kicker">03 / AUTO</span>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m13 2-9 12h7l-1 8 10-13h-7V2Z"/></svg>
-            </div>
-            <h3>Automation</h3>
-            <p>Auto Login, Auto Logout, Auto Chat, rum-workflows, Bingo Assistent og andre tidsbesparende værktøjer.</p>
-          </article>
+          <article class="card w4 reveal">
+            <span class="card-kicker">03 / AUTO</span>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m13 2-9 12h7l-1 8 10-13h-7V2Z"/></svg>
+            </div>
+            <h3>Automation</h3>
+            <p>Auto Login, Auto Logout, Auto Chat, rum-workflows, Bingo Assistent og andre tidsbesparende værktøjer.</p>
+          </article>
 
-          <article class="card w4 reveal">
-            <span class="card-kicker">04 / CHAT</span>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v8Z"/><path d="M8 9h8M8 13h5"/></svg>
-            </div>
-            <h3>NSX Chat</h3>
-            <p>Privat chat med rum, direkte beskeder, unread-state, typing-status, roller og moderation.</p>
-          </article>
+          <article class="card w4 reveal">
+            <span class="card-kicker">04 / CHAT</span>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v8Z"/><path d="M8 9h8M8 13h5"/></svg>
+            </div>
+            <h3>NSX Chat</h3>
+            <p>Privat chat med rum, direkte beskeder, unread-state, typing-status, roller og moderation.</p>
+          </article>
 
-          <article class="card w4 reveal">
-            <span class="card-kicker">05 / BRIDGE</span>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m21 3-7.4 18-4.1-7.3L3 10.5 21 3Z"/><path d="m9.5 13.7 4-3.7"/></svg>
-            </div>
-            <h3>Telegram Bridge</h3>
-            <p>Ekstern kontrol og notifikationer via Telegram-bot, inklusive tekst, rumoversigt og log-funktioner.</p>
-          </article>
+          <article class="card w4 reveal">
+            <span class="card-kicker">05 / BRIDGE</span>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m21 3-7.4 18-4.1-7.3L3 10.5 21 3Z"/><path d="m9.5 13.7 4-3.7"/></svg>
+            </div>
+            <h3>Telegram Bridge</h3>
+            <p>Ekstern kontrol og notifikationer via Telegram-bot, inklusive tekst, rumoversigt og log-funktioner.</p>
+          </article>
 
-          <article class="card w8 reveal">
-            <span class="card-kicker">06 / OWNER</span>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 4 7v5c0 4.4 3.1 7.8 8 9 4.9-1.2 8-4.6 8-9V7l-8-4Z"/><path d="m9 12 2 2 4-5"/></svg>
-            </div>
-            <h3>Owner & administration</h3>
-            <p>Administrér brugere, roller, licenser, device-binding og adgang fra samme system. Centrale rettigheder håndhæves server-side.</p>
-            <ul>
-              <li>Opret og administrér brugere</li>
-              <li>Forlæng, revoke eller genaktivér licenser</li>
-              <li>Reset device og følg administrative handlinger</li>
-            </ul>
-          </article>
+          <article class="card w8 reveal">
+            <span class="card-kicker">06 / OWNER</span>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 4 7v5c0 4.4 3.1 7.8 8 9 4.9-1.2 8-4.6 8-9V7l-8-4Z"/><path d="m9 12 2 2 4-5"/></svg>
+            </div>
+            <h3>Owner & administration</h3>
+            <p>Administrér brugere, roller, licenser, device-binding og adgang fra samme system. Centrale rettigheder håndhæves server-side.</p>
+            <ul>
+              <li>Opret og administrér brugere</li>
+              <li>Forlæng, revoke eller genaktivér licenser</li>
+              <li>Reset device og følg administrative handlinger</li>
+            </ul>
+          </article>
 
-          <article class="card w4 reveal">
-            <span class="card-kicker">07 / LOGS</span>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-            </div>
-            <h3>Logs & realtime</h3>
-            <p>Persistent WebSocket-log, chatlog, debugstatus og live Telegram-log giver indsigt i, hvad der sker.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+          <article class="card w4 reveal">
+            <span class="card-kicker">07 / LOGS</span>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            </div>
+            <h3>Logs & realtime</h3>
+            <p>Persistent WebSocket-log, chatlog, debugstatus og live Telegram-log giver indsigt i, hvad der sker.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <section id="security" class="section">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Access control</div>
-          <h2>Adgang i <span class="grad">flere lag.</span></h2>
-          <p>Klientlicens, chatadgang og brugerroller kan styres separat.</p>
-        </div>
+    <section id="security" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Access control</div>
+          <h2>Adgang i <span class="grad">flere lag.</span></h2>
+          <p>Klientlicens, chatadgang og brugerroller kan styres separat.</p>
+        </div>
 
-        <div class="security-grid">
-          <div class="security-item reveal"><b>Serverlicens</b><span>Bestemmer om NSX-klienten kan låses op.</span></div>
-          <div class="security-item reveal"><b>Device-binding</b><span>Licensen kan bindes ved første aktivering og resettes administrativt.</span></div>
-          <div class="security-item reveal"><b>IPv4-whitelist</b><span>NSX Chat kan begrænses til godkendte offentlige IPv4-adresser.</span></div>
-          <div class="security-item reveal"><b>Server-side roller</b><span>Owner, Admin, Moderator og User kan have forskellige rettigheder.</span></div>
-        </div>
-      </div>
-    </section>
+        <div class="security-grid">
+          <div class="security-item reveal"><b>Serverlicens</b><span>Bestemmer om NSX-klienten kan låses op.</span></div>
+          <div class="security-item reveal"><b>Device-binding</b><span>Licensen kan bindes ved første aktivering og resettes administrativt.</span></div>
+          <div class="security-item reveal"><b>IPv4-whitelist</b><span>NSX Chat kan begrænses til godkendte offentlige IPv4-adresser.</span></div>
+          <div class="security-item reveal"><b>Server-side roller</b><span>Owner, Admin, Moderator og User kan have forskellige rettigheder.</span></div>
+        </div>
+      </div>
+    </section>
 
-    <section id="download" class="section">
-      <div class="wrap">
-        <div class="cta reveal">
-          <div class="cta-grid">
-            <div>
-              <div class="eyebrow">NSX for Windows</div>
-              <h2>Installér. Aktivér.<br><span class="grad">Gå online.</span></h2>
-              <p>Download Windows-installeren og aktivér NSX med din licens.
-              </p>
-            </div>
+    <section id="download" class="section">
+      <div class="wrap">
+        <div class="cta reveal">
+          <div class="cta-grid">
+            <div>
+              <div class="eyebrow">NSX for Windows</div>
+              <h2>Installér. Aktivér.<br><span class="grad">Gå online.</span></h2>
+              <p>Download Windows-installeren og aktivér NSX med din licens.
+              </p>
+            </div>
 
-            <div class="download-stack">
-              <a class="button primary download-link" href="#" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
-                  <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/>
-                </svg>
-                Download Setup.exe
-              </a>
-              <small>NSX Client v<span data-version></span> · Windows</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+            <div class="download-stack">
+              <a class="button primary download-link" href="#" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                  <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/>
+                </svg>
+                Download Setup.exe
+              </a>
+              <small>NSX Client v<span data-version></span> · Windows</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <footer>
-    <div class="wrap footer-grid">
-      <div>
-        <div class="footer-brand">NSX CLIENT</div>
-        <div>Netstationen desktop client · automation · private chat · administration</div>
-      </div>
-      <div>React · Tauri · WebView2 · Native HTTP</div>
-    </div>
-  </footer>
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <div class="footer-brand">NSX CLIENT</div>
+        <div>Netstationen desktop client · automation · private chat · administration</div>
+      </div>
+      <div>React · Tauri · WebView2 · Native HTTP</div>
+    </div>
+  </footer>
 
-  <script>
-    /*
-      ============================================================
-      NSX PAGE CONFIG — DET ER PRIMÆRT HER, DU SKAL REDIGERE
-      ============================================================
-    */
-    const NSX_CONFIG = {
-      version: "0.5.2",
+  <script>
+    /*
+      ============================================================
+      NSX PAGE CONFIG — DET ER PRIMÆRT HER, DU SKAL REDIGERE
+      ============================================================
+    */
+    const NSX_CONFIG = {
+      version: "0.5.2",
 
-      // Sæt dit rigtige direkte link til Setup.exe her:
-      downloadUrl: "https://rubbaduckling.github.io/nsx.github.io/release/NSX-Setup.7z",
+      // Sæt dit rigtige direkte link til Setup.exe her:
+      downloadUrl: "https://rubbaduckling.github.io/nsx.github.io/release/NSX-Setup.7z",
 
-      // Upload din GIF til dette sted i GitHub-repoet:
-      demoGifUrl: "assets/nsx-demo.gif"
-    };
+      // Upload din GIF til dette sted i GitHub-repoet:
+      demoGifUrl: "assets/nsx-demo.gif"
+    };
 
-    document.querySelectorAll("[data-version]").forEach(el => el.textContent = NSX_CONFIG.version);
-    document.querySelectorAll(".download-link").forEach(link => {
-      link.href = NSX_CONFIG.downloadUrl;
-      link.setAttribute("aria-label", "Download NSX Client v" + NSX_CONFIG.version);
-    });
+    document.querySelectorAll("[data-version]").forEach(el => el.textContent = NSX_CONFIG.version);
+    document.querySelectorAll(".download-link").forEach(link => {
+      link.href = NSX_CONFIG.downloadUrl;
+      link.setAttribute("aria-label", "Download NSX Client v" + NSX_CONFIG.version);
+    });
 
-    const demoGif = document.getElementById("demoGif");
-    const demoFallback = document.getElementById("demoFallback");
-    demoGif.src = NSX_CONFIG.demoGifUrl;
-    demoGif.addEventListener("load", () => {
-      demoGif.classList.add("loaded");
-      demoFallback.classList.add("hidden");
-    });
-    demoGif.addEventListener("error", () => {
-      demoGif.classList.remove("loaded");
-      demoFallback.classList.remove("hidden");
-    });
+    const demoGif = document.getElementById("demoGif");
+    const demoFallback = document.getElementById("demoFallback");
+    demoGif.src = NSX_CONFIG.demoGifUrl;
+    demoGif.addEventListener("load", () => {
+      demoGif.classList.add("loaded");
+      demoFallback.classList.add("hidden");
+    });
+    demoGif.addEventListener("error", () => {
+      demoGif.classList.remove("loaded");
+      demoFallback.classList.remove("hidden");
+    });
 
-    // Åbn siden med ?preview=1 for at vælge en GIF lokalt uden at ændre repoet.
-    const previewMode = new URLSearchParams(location.search).get("preview") === "1";
-    const previewTools = document.getElementById("previewTools");
-    const gifPicker = document.getElementById("gifPicker");
+    // Åbn siden med ?preview=1 for at vælge en GIF lokalt uden at ændre repoet.
+    const previewMode = new URLSearchParams(location.search).get("preview") === "1";
+    const previewTools = document.getElementById("previewTools");
+    const gifPicker = document.getElementById("gifPicker");
 
-    if (previewMode) previewTools.classList.add("visible");
+    if (previewMode) previewTools.classList.add("visible");
 
-    gifPicker.addEventListener("change", () => {
-      const file = gifPicker.files && gifPicker.files[0];
-      if (!file) return;
-      const localUrl = URL.createObjectURL(file);
-      demoGif.src = localUrl;
-      demoGif.classList.add("loaded");
-      demoFallback.classList.add("hidden");
-    });
+    gifPicker.addEventListener("change", () => {
+      const file = gifPicker.files && gifPicker.files[0];
+      if (!file) return;
+      const localUrl = URL.createObjectURL(file);
+      demoGif.src = localUrl;
+      demoGif.classList.add("loaded");
+      demoFallback.classList.add("hidden");
+    });
 
-    const tickerItems = [
-      "Auto Login", "Auto Logout", "Ugeskema", "Auto Chat", "Auto Genindlæs",
-      "Gemte rum / Lift", "Reservér Plads", "TingGrab", "Auto Flyt", "Auto Samle Op",
-      "Bingo Assistent", "Auto Bingo", "SB Alarm", "Chat-omtaler", "Lejligheds-events",
-      "NSX Chat", "Telegram Bridge", "WebSocket Log"
-    ];
-    const ticker = document.getElementById("ticker");
-    [...tickerItems, ...tickerItems].forEach(item => {
-      const pill = document.createElement("span");
-      pill.className = "pill";
-      pill.textContent = item;
-      ticker.appendChild(pill);
-    });
+    const tickerItems = [
+      "Auto Login", "Auto Logout", "Ugeskema", "Auto Chat", "Auto Genindlæs",
+      "Gemte rum / Lift", "Reservér Plads", "TingGrab", "Auto Flyt", "Auto Samle Op",
+      "Bingo Assistent", "Auto Bingo", "SB Alarm", "Chat-omtaler", "Lejligheds-events",
+      "NSX Chat", "Telegram Bridge", "WebSocket Log"
+    ];
+    const ticker = document.getElementById("ticker");
+    [...tickerItems, ...tickerItems].forEach(item => {
+      const pill = document.createElement("span");
+      pill.className = "pill";
+      pill.textContent = item;
+      ticker.appendChild(pill);
+    });
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: .12 });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
 
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-    addEventListener("pointermove", event => {
-      document.documentElement.style.setProperty("--mx", event.clientX + "px");
-      document.documentElement.style.setProperty("--my", event.clientY + "px");
-    }, { passive: true });
-  </script>
+    addEventListener("pointermove", event => {
+      document.documentElement.style.setProperty("--mx", event.clientX + "px");
+      document.documentElement.style.setProperty("--my", event.clientY + "px");
+    }, { passive: true });
+  </script>
 </body>
 </html>
+
+
